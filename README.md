@@ -1,38 +1,35 @@
-# NetworkScienceProject
+# NXS PROJECT
 
-A reproducible network-science workflow for studying the structural evolution of the **US–Israel–Iran conflict system** through event data, actor interaction networks, community structure, and bridge-actor analysis.
+A reproducible network-science workflow for analyzing the structural evolution of the **US–Israel–Iran regional conflict system** using event data, actor–actor networks, community detection, bridge-actor analysis, and presentation-ready notebook visualizations.
 
-This repository combines **ACLED** and **UCDP GED** event data, harmonizes them into a common schema, filters the study to the core regional theater, segments the timeline into analytically meaningful phases, and builds network outputs suitable for quantitative analysis and visualization.
+This project integrates **ACLED** and **UCDP GED** event data, harmonizes them into a common schema, filters the analysis to the core conflict theater, segments the timeline into three historical phases, and builds phase-wise network outputs suitable for quantitative analysis, visualization, and reporting.
 
 ---
 
-## 1. Project overview
+## 1. Project objective
 
-The project asks a structural question:
+This project is designed to answer a structural question:
 
-> **How did the present regional conflict configuration emerge?**
+> **How did the present regional escalation emerge from earlier interaction patterns across the conflict system?**
 
-Instead of treating the present escalation as an isolated event, the workflow models the conflict system as an evolving network of actors across multiple theaters. The analysis focuses on:
+Instead of analyzing the current situation as a single isolated conflict episode, the project models the region as an evolving **multi-actor network** across multiple connected theaters.
 
-- actor interaction structure,
-- temporal expansion of the conflict system,
+The main analytical focus is on:
+
+- growth of the conflict interaction system over time,
+- actor–actor interaction structure,
 - community formation and fragmentation,
-- bridge actors connecting otherwise distinct communities,
-- phase-wise differences between earlier and current escalation patterns.
-
-The study uses a **multi-source event-data pipeline**:
-
-- **ACLED** for broad historical event coverage and actor-pair structure,
-- **UCDP GED** releases for extension into the 2025–2026 period.
+- bridge actors connecting otherwise separate blocs,
+- differences between early, transitional, and current escalation phases.
 
 ---
 
-## 2. Research goals
+## 2. Core analytical goals
 
-The repository is organized around five analytical goals:
+The workflow is organized around these goals:
 
-1. **Harmonize** ACLED and GED into a consistent event schema.
-2. **Filter** the dataset to the core theater:
+1. **Harmonize** ACLED and GED into one analysis-ready event schema.
+2. **Filter** the harmonized data to the strict core theater:
    - Israel
    - Palestine
    - Lebanon
@@ -41,185 +38,122 @@ The repository is organized around five analytical goals:
    - Yemen
    - Iran
    - United States
-3. **Segment** the event stream into three phases:
+3. **Segment** the data into three phases:
    - **Phase 1:** 2015–2018 — Transitional Shadow Phase
    - **Phase 2:** 2019–2021 — Escalatory Hybrid Phase
    - **Phase 3:** 2022–2026 — Current Escalation Phase
-4. **Build actor networks** and derive graph metrics.
-5. **Interpret structural change** using centrality, modularity, communities, and bridge actors.
+4. **Construct networks**:
+   - actor–actor interaction network
+   - event–actor bipartite network
+   - phase-wise actor networks
+5. **Compute graph metrics** and identify:
+   - central actors
+   - bridge actors
+   - community structure
+6. **Generate presentation-ready notebooks and visualizations**.
 
 ---
 
-## 3. Repository structure
+## 3. Project folder structure
 
-### Current repository layout
-
-```text
-NetworkScienceProject/
-├── configs/
-│   └── config.yaml
-├── data/
-│   └── (raw and intermediate datasets)
-├── notebooks/
-│   └── 01_diagnostic_checkpoint.ipynb
-├── src/
-│   ├── __init__.py
-│   ├── analysis/
-│   │   └── __init__.py
-│   ├── data/
-│   │   ├── __init__.py
-│   │   ├── apply_actor_dictionary.py
-│   │   ├── audit.py
-│   │   ├── build_core_actor_review.py
-│   │   ├── build_cross_theater_features_v2.py
-│   │   ├── explode_actor_tokens.py
-│   │   ├── feature_engineering.py
-│   │   ├── load_data.py
-│   │   ├── reconstruct_events.py
-│   │   ├── scope_filter.py
-│   │   ├── scope_filter_refined.py
-│   │   └── standardize_actors.py
-│   ├── networks/
-│   │   ├── __init__.py
-│   │   ├── build_multiplex_layers.py
-│   │   └── compute_network_metrics.py
-│   └── utils/
-│       ├── __init__.py
-│       └── helpers.py
-├── .gitattributes
-├── .gitignore
-├── README.md
-└── requirements.txt
-```
-
-### What each top-level directory does
-
-#### `configs/`
-Contains runtime configuration, dataset locations, thresholds, and experiment settings.
-
-#### `data/`
-Stores raw source data and intermediate tabular outputs.
-Typical contents during local work include:
-- raw ACLED export,
-- GED release files,
-- harmonized merged files,
-- filtered scope files,
-- phase-segmented files.
-
-#### `notebooks/`
-Notebook-first diagnostics and presentation workflow.
-Use this folder for:
-- exploratory checks,
-- stepwise validation,
-- polished presentation notebooks,
-- report figure generation.
-
-#### `src/data/`
-Data engineering and preprocessing logic:
-- loading source files,
-- actor cleaning,
-- filtering,
-- reconstruction,
-- feature engineering,
-- event standardization.
-
-#### `src/networks/`
-Network-construction and metric-computation logic:
-- edge construction,
-- multiplex layer construction,
-- graph statistics.
-
-#### `src/analysis/`
-Reserved for higher-level analytical logic and experiment orchestration.
-
-#### `src/utils/`
-Reusable helper functions shared across the project.
-
----
-
-## 4. Expected local working structure
-
-When running the full workflow locally, it is useful to maintain a working structure like this:
+The project currently uses the following local structure:
 
 ```text
-NetworkScienceProject/
-├── configs/
+NXS PROJECT/
 ├── data/
 │   ├── ACLED Data_2026-04-10.csv
 │   ├── GEDEvent_v25_01_25_12.csv
 │   ├── GEDEvent_v26_0_1.csv
 │   └── GEDEvent_v26_0_2.csv
-├── notebooks/
-│   ├── 01_diagnostic_checkpoint.ipynb
-│   ├── conflict_network_visualization_workflow.ipynb
-│   ├── NxS_Project_Polished_Visuals.ipynb
-│   └── NxS_Project_Presentation_Visuals_Enhanced.ipynb
 ├── output/
-│   ├── project_ready_conflict_harmonized_v2.csv
+│   ├── network_outputs/
+│   │   ├── actor_actor_edges_by_phase.csv
+│   │   ├── actor_actor_edges_overall.csv
+│   │   ├── actor_communities_by_phase.csv
+│   │   ├── actor_communities_overall.csv
+│   │   ├── actor_community_modularity_by_phase.csv
+│   │   ├── actor_community_modularity_overall.csv
+│   │   ├── actor_community_summary_by_phase.csv
+│   │   ├── actor_community_summary_overall.csv
+│   │   ├── actor_network_node_metrics_by_phase.csv
+│   │   ├── actor_network_node_metrics_overall.csv
+│   │   ├── actor_network_summary_by_phase.csv
+│   │   ├── actor_network_summary_overall.csv
+│   │   ├── actor_nodes_overall.csv
+│   │   ├── bridge_actors_by_phase_cleaned.csv
+│   │   ├── bridge_actors_by_phase_filtered.csv
+│   │   ├── bridge_actors_by_phase.csv
+│   │   ├── bridge_actors_overall_cleaned.csv
+│   │   ├── bridge_actors_overall_filtered.csv
+│   │   ├── bridge_actors_overall.csv
+│   │   ├── event_actor_bipartite_edges.csv
+│   │   ├── event_nodes_overall.csv
+│   │   ├── phase_comparison_table.csv
+│   │   ├── report_highlights_table.csv
+│   │   ├── top_actors_per_community_by_phase_cleaned.csv
+│   │   ├── top_actors_per_community_by_phase.csv
+│   │   ├── top_actors_per_community_overall.csv
+│   │   └── top10_bridge_actors_by_phase.csv
+│   ├── presentation_plots/
 │   ├── conflict_filtered_phase2_core_v2.csv
 │   ├── conflict_phase3_segmented_v2.csv
-│   ├── network_outputs/
-│   │   ├── actor_actor_edges_overall.csv
-│   │   ├── actor_actor_edges_by_phase.csv
-│   │   ├── event_actor_bipartite_edges.csv
-│   │   ├── actor_network_node_metrics_overall.csv
-│   │   ├── actor_network_node_metrics_by_phase.csv
-│   │   ├── actor_network_summary_overall.csv
-│   │   ├── actor_network_summary_by_phase.csv
-│   │   ├── actor_communities_overall.csv
-│   │   ├── actor_communities_by_phase.csv
-│   │   ├── bridge_actors_overall_cleaned.csv
-│   │   ├── bridge_actors_by_phase_cleaned.csv
-│   │   └── ...
-│   └── presentation_plots/
-├── src/
+│   └── project_ready_conflict_harmonized_v2.csv
+├── scripts/
+│   ├── add_phase_labels_v2.py
+│   ├── build_networks_phase4.py
+│   ├── community_bridge_phase6.py
+│   ├── compute_network_metrics_phase5.py
+│   ├── filter_conflict_scope_strict_v2.py
+│   ├── harmonize_conflict_data_v2.py
+│   └── phase7_report_tables.py
+├── venv/
+├── .gitattributes
+├── .gitignore
+├── conflict_network_visualization_workflow.ipynb
+├── NxS_Project_Polished_Visuals.ipynb
+├── NxS_Project_Presentation_Visuals_Enhanced.ipynb
+├── README.md
 └── requirements.txt
 ```
 
-The `output/` directory is not required to exist before the first run; it is created as the pipeline executes.
-
 ---
 
-## 5. Data sources
+## 4. What each folder and file does
 
-This project relies on conflict event data from:
+### `data/`
+Stores the raw source datasets used in the project.
 
-- **ACLED** for coded event records and actor interaction fields,
-- **UCDP GED** releases for event continuity into 2025–2026.
+Files:
+- `ACLED Data_2026-04-10.csv`  
+  Main ACLED export containing native actor interaction fields such as `actor1`, `actor2`, `assoc_actor_1`, `assoc_actor_2`, `inter1`, and `inter2`.
 
-### Local input files used in the current workflow
+- `GEDEvent_v25_01_25_12.csv`  
+  GED event data for the 2025 release window.
 
-The local analysis described in this repository used:
-
-- `ACLED Data_2026-04-10.csv`
-- `GEDEvent_v25_01_25_12.csv`
 - `GEDEvent_v26_0_1.csv`
-- `GEDEvent_v26_0_2.csv`
+- `GEDEvent_v26_0_2.csv`  
+  GED event releases extending coverage into 2026.
 
+These are the raw inputs for the harmonization pipeline.
 
 ---
 
-## 6. Processing pipeline
+### `scripts/`
+Contains the full execution pipeline, organized phase by phase.
 
-The full workflow follows these stages.
+#### `harmonize_conflict_data_v2.py`
+Phase 1. Reads ACLED + GED source files and creates the harmonized merged dataset:
 
-### Phase 1 — Harmonization
-ACLED and GED are mapped into a unified schema with consistent names for:
-- event ID,
-- event date,
-- actor fields,
-- geographic fields,
-- fatalities,
-- notes,
-- event-type fields,
-- provenance metadata.
+- standardizes column names,
+- preserves actor and geography fields,
+- keeps provenance information,
+- deduplicates overlapping GED events.
 
-Key point:
-- the revised ACLED export includes native `actor2`, `assoc_actor_2`, and `inter2`,
-  which makes actor–actor analysis methodologically stronger than the earlier proxy-based version.
+Output:
+- `output/project_ready_conflict_harmonized_v2.csv`
 
-### Phase 2 — Scope filtering
-The harmonized dataset is restricted to the core theater:
+#### `filter_conflict_scope_strict_v2.py`
+Phase 2. Restricts the harmonized dataset to the strict core theater:
 
 - Israel
 - Palestine
@@ -230,26 +164,33 @@ The harmonized dataset is restricted to the core theater:
 - Iran
 - United States
 
-This creates the **main analysis dataset** used for the reported results.
+Output:
+- `output/conflict_filtered_phase2_core_v2.csv`
 
-### Phase 3 — Phase segmentation
-Rows are labeled by historical phase:
+#### `add_phase_labels_v2.py`
+Phase 3. Adds:
+- `phase`
+- `phase_label`
 
-- **Phase 1:** 2015–2018  
-- **Phase 2:** 2019–2021  
-- **Phase 3:** 2022–2026  
+using the three historical periods defined for the project.
 
-This enables phase-wise network comparison.
+Output:
+- `output/conflict_phase3_segmented_v2.csv`
 
-### Phase 4 — Network construction
-The pipeline builds:
+#### `build_networks_phase4.py`
+Phase 4. Constructs the network-ready datasets:
 
-- **actor–actor edge lists**
-- **event–actor bipartite edge lists**
-- **phase-wise actor–actor networks**
+- overall actor–actor edge list,
+- phase-wise actor–actor edge list,
+- event–actor bipartite edge list,
+- actor node table,
+- event node table.
 
-### Phase 5 — Network metrics
-Graph metrics are computed, including:
+Outputs go to:
+- `output/network_outputs/`
+
+#### `compute_network_metrics_phase5.py`
+Phase 5. Computes network metrics, including:
 
 - degree,
 - weighted degree,
@@ -259,21 +200,190 @@ Graph metrics are computed, including:
 - clustering coefficient,
 - density,
 - connected components,
-- largest connected component size.
+- largest component size.
 
-### Phase 6 — Community and bridge-actor analysis
-Community structure is detected using **Louvain modularity optimization**, followed by bridge-actor ranking.
+Outputs:
+- network summaries
+- node-metric tables
 
-### Phase 7 — Report-ready outputs
-Phase-wise comparison tables, cleaned bridge-actor tables, and presentation-ready figures are generated.
+#### `community_bridge_phase6.py`
+Phase 6. Performs:
+
+- Louvain community detection,
+- modularity calculation,
+- community summaries,
+- bridge-actor scoring,
+- cleaned and filtered bridge-actor tables.
+
+#### `phase7_report_tables.py`
+Phase 7. Creates report-ready tables:
+
+- phase comparison table,
+- report highlights table,
+- cleaned bridge-actor outputs,
+- community summary tables.
 
 ---
 
-## 7. Main results snapshot
+### `output/`
+Stores all generated outputs from the pipeline.
 
-The current strict core-theater analysis produced a phase-segmented dataset of **546,300 events**.
+#### Main processed datasets
+- `project_ready_conflict_harmonized_v2.csv`  
+  Harmonized ACLED + GED merged dataset.
 
-### Actor–actor network growth across phases
+- `conflict_filtered_phase2_core_v2.csv`  
+  Strictly filtered core-theater dataset.
+
+- `conflict_phase3_segmented_v2.csv`  
+  Final event-level dataset used for the phase-wise network analysis.
+
+#### `output/network_outputs/`
+Stores all network-analysis outputs.
+
+Key files include:
+
+##### Edge lists
+- `actor_actor_edges_overall.csv`
+- `actor_actor_edges_by_phase.csv`
+- `event_actor_bipartite_edges.csv`
+
+##### Node tables
+- `actor_nodes_overall.csv`
+- `event_nodes_overall.csv`
+
+##### Network metrics
+- `actor_network_node_metrics_overall.csv`
+- `actor_network_node_metrics_by_phase.csv`
+- `actor_network_summary_overall.csv`
+- `actor_network_summary_by_phase.csv`
+
+##### Community analysis
+- `actor_communities_overall.csv`
+- `actor_communities_by_phase.csv`
+- `actor_community_modularity_overall.csv`
+- `actor_community_modularity_by_phase.csv`
+- `actor_community_summary_overall.csv`
+- `actor_community_summary_by_phase.csv`
+
+##### Bridge actor outputs
+- `bridge_actors_overall.csv`
+- `bridge_actors_overall_filtered.csv`
+- `bridge_actors_overall_cleaned.csv`
+- `bridge_actors_by_phase.csv`
+- `bridge_actors_by_phase_filtered.csv`
+- `bridge_actors_by_phase_cleaned.csv`
+- `top10_bridge_actors_by_phase.csv`
+
+##### Report-ready tables
+- `phase_comparison_table.csv`
+- `report_highlights_table.csv`
+- `top_actors_per_community_overall.csv`
+- `top_actors_per_community_by_phase.csv`
+- `top_actors_per_community_by_phase_cleaned.csv`
+
+#### `output/presentation_plots/`
+Stores saved plots generated for presentations and reporting.
+
+---
+
+### Notebook files in project root
+
+#### `conflict_network_visualization_workflow.ipynb`
+Step-by-step workflow notebook used to present the full process:
+- raw data,
+- preprocessing,
+- phase segmentation,
+- network construction,
+- metrics,
+- communities,
+- bridge actors.
+
+#### `NxS_Project_Polished_Visuals.ipynb`
+More presentation-oriented notebook with cleaner figures and summary visuals.
+
+#### `NxS_Project_Presentation_Visuals_Enhanced.ipynb`
+Most visualization-heavy notebook. Contains more colorful and denser plots for presentation and viva use.
+
+---
+
+### Environment and metadata files
+
+#### `venv/`
+Local Python virtual environment.
+
+#### `requirements.txt`
+Dependency list used to recreate the project environment.
+
+#### `.gitignore`
+Git ignore rules.
+
+#### `.gitattributes`
+Git attributes and file-handling metadata.
+
+---
+
+## 5. Data-processing pipeline
+
+The project is executed in the following order.
+
+### Phase 1 — Harmonization
+Merge ACLED and GED into one standardized dataset.
+
+Important details:
+- uses real ACLED `actor2` and `assoc_actor_2`,
+- keeps actor provenance and geography fields,
+- resolves overlapping GED event IDs.
+
+Output:
+- `project_ready_conflict_harmonized_v2.csv`
+
+### Phase 2 — Strict theater filtering
+Restrict the study to the core theater countries only.
+
+Output:
+- `conflict_filtered_phase2_core_v2.csv`
+
+### Phase 3 — Historical phase labeling
+Assign each event to:
+- Phase 1,
+- Phase 2,
+- Phase 3.
+
+Output:
+- `conflict_phase3_segmented_v2.csv`
+
+### Phase 4 — Network construction
+Build:
+- actor–actor edge lists,
+- event–actor bipartite edge lists,
+- node tables.
+
+### Phase 5 — Network metrics
+Compute:
+- degree,
+- weighted degree,
+- betweenness,
+- eigenvector centrality,
+- clustering,
+- density,
+- connected components.
+
+### Phase 6 — Communities and bridge actors
+Detect communities and rank bridge actors.
+
+### Phase 7 — Report outputs
+Create tables and cleaned outputs for interpretation and presentation.
+
+---
+
+## 6. Main results summary
+
+The strict phase-segmented dataset used for the final analysis contains:
+
+- **546,300 events**
+
+### Phase-wise actor–actor network growth
 
 | Phase | Nodes | Edges | Communities | Connected Components | Largest Component | Density | Modularity |
 |------|------:|------:|------------:|---------------------:|------------------:|--------:|-----------:|
@@ -286,76 +396,76 @@ The current strict core-theater analysis produced a phase-segmented dataset of *
 - **Nodes:** 2,520
 - **Edges:** 6,145
 - **Connected components:** 221
-- **Largest connected component:** 2,024 nodes
+- **Largest connected component:** 2,024
 - **Density:** 0.001936
 - **Average clustering:** 0.000136
 - **Communities (overall):** 253
 - **Overall modularity:** 0.714908
 
-### Interpreting these results
+### Bridge-actor findings
 
-The main structural trend is clear:
+#### Top bridge actor by phase
+- **Phase 1:** Islamic State in Iraq and the Levant (ISIL)
+- **Phase 2:** Military Forces of Yemen (2017–) Houthi
+- **Phase 3:** Military Forces of Israel (2022–)
 
-- the conflict system **expands** strongly from Phase 1 to Phase 3,
-- the number of communities increases substantially,
-- density decreases over time, indicating **expansion and fragmentation** rather than convergence into one dense block,
-- modularity remains high across all phases, showing a persistent **community/bloc structure**.
-
-### Top bridge actors (overall, cleaned)
-
-The cleaned bridge-actor list is dominated by actors with cross-theater or structurally linking roles, including:
+#### Overall cleaned bridge actors
+The overall cleaned bridge list prominently includes:
 
 - Islamic State in Iraq and the Levant (ISIL)
 - Military Forces of Yemen (2017–) Houthi
 - Military Forces of Israel (2022–)
 - Military Forces of Syria (2000–2024)
 - Military Forces of Turkey (2016–)
-- Syrian Democratic Forces
+- Military Forces of Yemen (2012–2022) Hadi
+- QSD / Syrian Democratic Forces
 - PKK
-- Hadi-aligned Yemeni forces
 
-### Top bridge actor by phase
+### Structural interpretation
+The network results show that:
 
-- **Phase 1:** ISIL
-- **Phase 2:** Military Forces of Yemen (2017–) Houthi
-- **Phase 3:** Military Forces of Israel (2022–)
+- the conflict system grows substantially across phases,
+- the number of communities rises sharply,
+- density declines over time, indicating expansion with fragmentation,
+- modularity remains high, showing persistent bloc structure,
+- bridge actors shift over time from ISIL to Houthi forces to Israeli military forces.
 
-This phase shift is one of the central substantive findings of the project.
+This supports the argument that the present escalation emerged through a broader regional structural transformation rather than a single isolated trigger.
 
 ---
 
-## 8. How to clone and run locally
+## 7. How to clone and run locally
 
-### Step 1 — Clone the repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/RohanSinha000821/NetworkScienceProject.git
 cd NetworkScienceProject
 ```
 
-### Step 2 — Create and activate a virtual environment
+---
 
-#### Windows
+## 8. Environment setup
+
+### Windows
 ```bash
 python -m venv venv
 venv\Scripts\activate
-```
-
-#### Linux / macOS
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Step 3 — Install dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
-### Step 4 — Add raw input data
+### Linux / macOS
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
-Place the required CSV files inside the `data/` directory:
+---
+
+## 9. Required input data
+
+Place the raw datasets in the `data/` directory exactly like this:
 
 ```text
 data/
@@ -365,125 +475,120 @@ data/
 └── GEDEvent_v26_0_2.csv
 ```
 
-### Step 5 — Launch Jupyter
+These raw CSV files are required before running the scripts.
 
+---
+
+## 10. How to run the full pipeline
+
+Run the scripts in this order from the project root.
+
+### Step 1 — Harmonization
 ```bash
-jupyter lab
+python scripts\harmonize_conflict_data_v2.py
 ```
 
-or
+### Step 2 — Strict filtering
+```bash
+python scripts\filter_conflict_scope_strict_v2.py
+```
+
+### Step 3 — Phase segmentation
+```bash
+python scripts\add_phase_labels_v2.py
+```
+
+### Step 4 — Network construction
+```bash
+python scripts\build_networks_phase4.py
+```
+
+### Step 5 — Network metrics
+```bash
+python scripts\compute_network_metrics_phase5.py
+```
+
+### Step 6 — Community and bridge analysis
+```bash
+python scripts\community_bridge_phase6.py
+```
+
+### Step 7 — Report-ready tables
+```bash
+python scripts\phase7_report_tables.py
+```
+
+After these steps, the main outputs will appear in:
+
+- `output/`
+- `output/network_outputs/`
+
+---
+
+## 11. Running the notebooks
+
+You can launch Jupyter using:
 
 ```bash
 jupyter notebook
 ```
 
-### Step 6 — Run the notebook(s)
+or
 
-Start with:
-
-```text
-notebooks/01_diagnostic_checkpoint.ipynb
+```bash
+jupyter lab
 ```
 
-If you have the presentation notebooks locally, run them from the same repository root so all relative paths resolve correctly.
+Then open one of the following root-level notebooks:
+
+- `conflict_network_visualization_workflow.ipynb`
+- `NxS_Project_Polished_Visuals.ipynb`
+- `NxS_Project_Presentation_Visuals_Enhanced.ipynb`
+
+### Recommended usage
+- use `conflict_network_visualization_workflow.ipynb` to explain the full pipeline,
+- use `NxS_Project_Polished_Visuals.ipynb` for cleaner presentation figures,
+- use `NxS_Project_Presentation_Visuals_Enhanced.ipynb` for the most colorful and visually rich presentation flow.
 
 ---
 
-## 9. Recommended local execution order
+## 12. Reproducibility notes
 
-For reproducible end-to-end execution, the recommended order is:
+To keep the pipeline reproducible:
 
-1. **Diagnostic notebook**
-   - verify data availability and schema,
-   - confirm that paths in `config.yaml` are correct.
-
-2. **Harmonization**
-   - merge ACLED and GED into a common format.
-
-3. **Scope filtering**
-   - restrict to the strict core-theater dataset.
-
-4. **Phase segmentation**
-   - create phase labels.
-
-5. **Network construction**
-   - build overall and phase-wise edge lists.
-
-6. **Metric computation**
-   - compute node-level and graph-level network statistics.
-
-7. **Community + bridge analysis**
-   - detect communities and rank bridge actors.
-
-8. **Visualization notebooks**
-   - create presentation-quality plots.
+- do not mix outputs from old ACLED exports with new ones,
+- regenerate downstream outputs whenever the ACLED source file changes,
+- keep the raw file names and locations consistent,
+- run the scripts in the order documented above,
+- use the same environment and dependency versions whenever possible.
 
 ---
 
-## 10. Configuration notes
+## 13. Requirements
 
-The repository includes:
+The main Python stack includes:
 
-```text
-configs/config.yaml
+- pandas
+- matplotlib
+- networkx
+- python-louvain
+- jupyter
+
+Install all dependencies using:
+
+```bash
+pip install -r requirements.txt
 ```
 
-Use this file for:
-- raw data paths,
-- output paths,
-- filtering thresholds,
-- notebook/runtime parameters.
-
-If you move datasets or change local folder names, update the configuration accordingly.
-
 ---
 
-## 11. Reproducibility notes
+## 14. Future extensions
 
-To keep the analysis reproducible:
+Possible future extensions include:
 
-- use the same raw ACLED and GED files throughout one run,
-- keep a consistent `data/` structure,
-- do not mix old harmonized outputs with new ACLED exports,
-- regenerate all downstream outputs whenever the ACLED source file changes,
-- keep notebook execution order fixed.
-
----
-
-## 12. Typical generated outputs
-
-After a successful run, you should expect outputs such as:
-
-### Tabular outputs
-- harmonized event dataset,
-- strict filtered core-theater dataset,
-- phase-segmented dataset,
-- actor–actor edge lists,
-- bipartite event–actor edge lists,
-- network metric tables,
-- community assignments,
-- bridge-actor rankings,
-- report-ready comparison tables.
-
-### Visual outputs
-- source-data composition plots,
-- preprocessing retention plots,
-- country and phase composition charts,
-- network growth plots,
-- bridge-actor charts,
-- community distribution charts,
-- phase-wise network visualizations.
-
----
-
-## 13. Future extensions
-
-The repository can be extended in several directions:
-
-- richer event reconstruction for cross-theater linkages,
-- multiplex or multilayer network analysis,
-- geographic overlays and map-based visualization,
+- multiplex network analysis,
 - temporal cascade networks,
-- robustness checks under alternative actor dictionaries,
-- community-comparison methods beyond Louvain,
-- more formal hypothesis testing on phase transitions.
+- geo-spatial mapping,
+- actor-dictionary refinement,
+- stronger robustness checks across actor categories,
+- additional policy-oriented visualization layers.
