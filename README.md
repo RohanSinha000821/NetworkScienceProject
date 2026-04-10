@@ -196,8 +196,6 @@ The local analysis described in this repository used:
 - `GEDEvent_v26_0_1.csv`
 - `GEDEvent_v26_0_2.csv`
 
-> Important:
-> Raw datasets may be large and may not be committed to Git depending on licensing, file size, or local policy. If the repository does not contain the raw CSVs, place them manually inside `data/`.
 
 ---
 
@@ -478,23 +476,7 @@ After a successful run, you should expect outputs such as:
 
 ---
 
-## 13. Suggested presentation flow
-
-For a project defense or advisor presentation, a strong order is:
-
-1. Raw data and schema
-2. Harmonization logic
-3. Scope filtering
-4. Phase segmentation
-5. Network construction
-6. Growth of nodes/edges/communities across phases
-7. Modularity and fragmentation
-8. Bridge actors
-9. Interpretation of the current escalation phase
-
----
-
-## 14. Future extensions
+## 13. Future extensions
 
 The repository can be extended in several directions:
 
@@ -505,18 +487,3 @@ The repository can be extended in several directions:
 - robustness checks under alternative actor dictionaries,
 - community-comparison methods beyond Louvain,
 - more formal hypothesis testing on phase transitions.
-
----
-
-## 15. License and usage
-
-Before distributing raw event data, verify the relevant usage conditions for the source datasets.  
-Code and notebooks in this repository can be versioned normally, but raw data handling should respect source licensing and institutional policy.
-
----
-
-## 16. Acknowledgment
-
-This project was developed as a network-science study of regional conflict evolution using event data, graph analytics, and notebook-based visual reporting.
-
-If you use or extend this repository, please retain attribution to the repository author and document any major changes to the data pipeline.
