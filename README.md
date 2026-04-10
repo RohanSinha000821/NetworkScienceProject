@@ -545,11 +545,6 @@ Then open one of the following root-level notebooks:
 - `NxS_Project_Polished_Visuals.ipynb`
 - `NxS_Project_Presentation_Visuals_Enhanced.ipynb`
 
-### Recommended usage
-- use `conflict_network_visualization_workflow.ipynb` to explain the full pipeline,
-- use `NxS_Project_Polished_Visuals.ipynb` for cleaner presentation figures,
-- use `NxS_Project_Presentation_Visuals_Enhanced.ipynb` for the most colorful and visually rich presentation flow.
-
 ---
 
 ## 12. Reproducibility notes
