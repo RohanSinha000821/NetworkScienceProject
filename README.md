@@ -1,4 +1,4 @@
-# NXS PROJECT
+# Network Science Project
 
 A reproducible network-science workflow for analyzing the structural evolution of the **US–Israel–Iran regional conflict system** using event data, actor–actor networks, community detection, bridge-actor analysis, and presentation-ready notebook visualizations.
 
